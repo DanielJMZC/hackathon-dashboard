@@ -1,5 +1,5 @@
 import { db } from '../db.js';
-import {createUser, getUserByEmail, updateXP, updateLevel, updateDate, verifyPassword} from '../models/userModel.js';
+import {createUser, getUserByEmail, updateXP, updateLevel, updateDate, verifyPassword, getUserById} from '../models/userModel.js';
 import {getLevelById} from '../models/levelModel.js';
 
 
@@ -93,7 +93,7 @@ export async function registerUser(username, email, password) {
     return id;
 }
 
-export async function loginuser(email, password) {
+export async function loginUser(email, password) {
     const user = await getUserByEmail(email);
     if (!user) {
         throw new Error('Invalid Credentials');
@@ -122,4 +122,8 @@ export async function loginuser(email, password) {
             level: user.idLevel
         }
     };
+}
+
+export async function getUser(userId) {
+    return getUserById(userId);
 }
