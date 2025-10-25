@@ -14,6 +14,7 @@ export async function createUser(username, email, plainPassword) {
 
 }
 
+
 async function hashPassword(plainPassword) {
   const hash = await bcrypt.hash(plainPassword, 10);
   return hash;
@@ -22,3 +23,5 @@ async function hashPassword(plainPassword) {
 async function verifyPassword(plainPassword, hash) {
   return await bcrypt.compare(plainPassword, hash);
 }
+
+
