@@ -1,7 +1,4 @@
 import { db } from '../db.js';
-import {getMissionById} from '../models/missionModel.js';
-import {updateXP, updateLevel, getUserById, awardXP} from '../models/userModel.js';
-import {getLevelById} from '../models/levelModel.js';
 
 
 export async function addTransaction(userId, type_id, amount, description, missionId) {
@@ -71,22 +68,3 @@ export async function deleteTransaction(transactionId) {
 
 }
 
-export async function awardMissionXP(userId, missionId) {
-  const mission = await getMissionById(missionId);
-  const string = 'Completed the Mission: ' + mission.name;
-  const user = await getUserById(userId);
-
-  const rows = await addTransaction(userId, 1, mission.reward_xp, string, missionId);
-  user.xp += mission.reward_xp;
-  await awardXP(userId, mission.reward_xp);
-  let level = await getLevelById(user.idLevel);
-  while ((user.xp >= level.xp_needed) && level) {
-    const xp = user.xp;
-    const newXP = user.xp - level.xp_needed;
-    user.xp = newXP;
-    await updateXP(userId, newXP);
-    user.idLevel += 1;
-    await updateLevel(userId, user.idLevel);
-    level = await getLevelById(user.idLevel);
-  }
-}

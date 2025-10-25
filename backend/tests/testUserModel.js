@@ -1,13 +1,8 @@
-import {createUser, getUserById, getUserByEmail, getAllUsers, updateUser, updateXP, updateLevel, changePassword, deleteUser} from '../models/userModel.js';
+import {completeMission} from '../services/missionService.js';
 
 async function runTests() {
   try {
-    const updates = {
-      name: "Santa",
-      email: "santaclaus@gmail.com",
-    }
-    updateUser(5, updates);
-     
+    completeMission(5, 2);
   } catch (err) {
     console.error('Error:', err.message);
   }
