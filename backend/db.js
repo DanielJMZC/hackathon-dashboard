@@ -16,7 +16,7 @@ async function testConnection() {
   try {
       const connection = await db.getConnection();
     console.log('Database connected!');
-    connection.release();ç
+    connection.release();
   } catch (err) {
       console.error('DB connection error:', err.message);
   }

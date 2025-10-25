@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import { db } from '../db.js';
 
 export async function createMission(userId, description, rewardXp, rewardGold, name, expiration) {
