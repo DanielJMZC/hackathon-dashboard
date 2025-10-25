@@ -136,8 +136,3 @@ export async function getCompletedMissions(missionId){
   }
 
 }
-
-export async function awardMissionReward(userId, missionId){
-  //Using transaction model :)
-
-}
