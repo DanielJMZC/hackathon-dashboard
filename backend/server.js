@@ -15,12 +15,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Example API
-app.post('/add-xp', (req, res) => {
-  const { userId, xpGain } = req.body;
-  res.json({ status: 'success', userId, xpGain });
-});
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
