@@ -14,6 +14,7 @@ export async function createUser(username, email, plainPassword) {
 
 }
 
+
 async function hashPassword(plainPassword) {
   const hash = await bcrypt.hash(plainPassword, 10);
   return hash;
@@ -22,27 +23,3 @@ async function hashPassword(plainPassword) {
 async function verifyPassword(plainPassword, hash) {
   return await bcrypt.compare(plainPassword, hash);
 }
-
-export async function getUserById(userId) {
-  const [user] = await db.query(
-    'SELECT * FROM users WHERE id = ?',
-    [userId]
-  );
-}
-
-export async function getUserByEmail(email) {
-  const [user] = await db.query(
-    'SELECT * FROM users WHERE email = ?',
-    [email]
-  );
-
-  return user[0];
-}
-
-export async function getAllUsers() {
-   const [user] = await db.query(
-    'SELECT * FROM users'
-  );
-}
-
-export async
