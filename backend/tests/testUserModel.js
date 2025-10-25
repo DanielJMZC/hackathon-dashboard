@@ -1,12 +1,9 @@
-import { createUser, getUserById} from '../models/userModel.js';
+import {createUser, getUserById, getUserByEmail, getAllUsers, updateUser, updateXP, updateLevel, changePassword, deleteUser} from '../models/userModel.js';
 
 async function runTests() {
   try {
-      const user = await getUserById(1);
-
-  
-    console.log(user.name);
-
+    await deleteUser(3);
+     
   } catch (err) {
     console.error('Error:', err.message);
   }
