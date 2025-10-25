@@ -6,3 +6,7 @@ export async function completeMission(userId, missionId) {
     awardMissionXP(userId, missionId);
     awardMissionGold(userId, missionId);
 }
+
+export async function getAllUserMissions(userId) {
+    return await getMissionsForUser(userId);
+}
