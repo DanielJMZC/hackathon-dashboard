@@ -1,7 +1,7 @@
-import * as missionService from '..services/missionService.js';
+import * as missionService from '../services/missionService.js';
 
 
-export async function completeMission(req, res) {
+const completeMission = async(req, res) => {
     try {
         const {userId, missionId} = req.body;
         await missionService.completeMission(userId, missionId);
@@ -9,9 +9,9 @@ export async function completeMission(req, res) {
     } catch (err) {
         res.status(400).json({error: err.message});
     }
-}
+};
 
-export async function getAllUserMissions(req, res) {
+const getAllUserMissions = async(req, res) => {
     try {
         const {userId} = req.body;
         await missionService.getAllUserMissions(userId);
@@ -19,4 +19,9 @@ export async function getAllUserMissions(req, res) {
     } catch (err) {
         res.status(400).json({error: err.message});
     }
-}
+};
+
+export default {
+    completeMission,
+    getAllUserMissions
+};
