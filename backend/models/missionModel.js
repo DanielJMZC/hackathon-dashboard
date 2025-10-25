@@ -123,7 +123,7 @@ export async function getCompletedMissions(missionId){
     const status = 'completed';
 
     const [rows] = await db.query(
-      'SELECT * FROM mission WHERE id = ? AND status = ?',
+      'SELECT * FROM mission WHERE id = ?  AND status = ?'
       [missionId, status]
     );
 
