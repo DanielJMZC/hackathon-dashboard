@@ -96,7 +96,7 @@ export async function updateUser(userId, updates) {
   }
 }
 
-export async function updateXP(userId, xpToAdd) {
+export async function awardXP(userId, xpToAdd) {
    try {
 
     const [rows] = await db.query(
@@ -121,6 +121,37 @@ export async function updateXP(userId, xpToAdd) {
     await updateDate(userId);
 
     return xpUpdated;
+
+  } catch (err) {
+      console.error('Database error in updateUser:', err.message);
+      throw new Error('Failed to update user');
+  }
+}
+
+export async function updateXP(userId, xp) {
+   try {
+
+    const [rows] = await db.query(
+      'SELECT xp FROM users WHERE id = ?',
+      [userId]
+    );
+
+    if (rows.length === 0) {
+        throw new Error('User not found');
+    }
+
+    const [results] = await db.query(
+      'UPDATE users SET xp = ? WHERE id = ?',
+      [xp, userId]
+    );
+
+    if (results.affectedRows === 0) {
+      throw new Error('User not found or no changes made');
+    }
+
+    await updateDate(userId);
+
+    return xp;
 
   } catch (err) {
       console.error('Database error in updateUser:', err.message);
