@@ -1,0 +1,40 @@
+/* General page styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    color: #444;
+    text-align: left;
+}
+
+/* Buttons */
+button {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #006f98;
+}
+
+/* Boxes */
+.box {
+    width: 200px;
+    height: 100px;
+    background-color: #ffcc00;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 10px;
+}
