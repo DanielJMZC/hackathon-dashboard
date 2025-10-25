@@ -1,43 +1,99 @@
+@font-face {
+    font-family: 'Pixels';
+    src: url("./Fonts/Game.otf");
+
+    font-family: 'Maestro';
+    src: url("./Fonts/Maestro.otf")
+}
+
+h1 {
+    font-family: 'Maestro', sans-serif;
+    font-size: 30px;
+}
 .sidebar{
-    background-color: rgb(174, 214, 249);
+    background-color: rgb(180, 216, 57);
     width: max-content;
     border-radius: 10px;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
+    height: 645px;
+}
+
+.sidebarText {
+    font-family: 'Pixels', sans-serif;
+    font-size: 30px;
+}
+
+.sidebar:hover .sidebarElement{
+    grid-template-columns: 40px 1fr;
 }
 
 .sidebarList {
     list-style: none;
     padding: 0;
-    min-height: 600px;
+    min-height: 550px;
     display: flex;
     flex-direction: column;
-    gap: .4rem;
+    gap: .2rem;
 
 }
 
 .sidebarElement{
-    padding: .8rem 1.3rem;
+    padding: .5rem .3rem;
     border-radius:3px;
 
     display: grid;
     align-items: center;
-    grid-template-columns: 40px 1fr;
-    color: #526581;
+    grid-template-columns: 40px 0px;
+    column-gap: 0.5rem;
+    color: rgb(19, 120, 91);
 }
 
-.sidebarElement:not(.sidebarElement--logo):hover{
-    background-color: chocolate;
-    color: rgb(205, 146, 104);
-    fill:rgb(205, 146, 104);
+.sidebarIcon{
+    width: 100%;
+    overflow: hidden;
+    justify-self: center;
+}
+
+/*Falta logo*/
+
+.sidebarIconProfile{
+    width: 40px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+
+}
+
+/*logo no muestra seleccion*/
+.sidebarElement:not(.sidebarElementLogo):hover{
+    background-color: rgb(250, 111, 6);
+    color: rgb(151, 69, 6);
+    fill:rgb(151, 69, 6);
     cursor: pointer;
+
+    transition: grid-template-columns 0.4s;
 }
 
-.sidebarElement:not(.sidebarElement--logo){
+.sidebarElement:not(.sidebarElementLogo){
     margin-bottom: 1rem;
 }
 
 /*falta carga logos para cada opcion*/
 
-.sidebar_hide{
+.sidebarHide{
     overflow: hidden;
+}
+
+.sidebarElementProfile{
+    margin-top: 100px;
+    text-wrap: nowrap;
+    text-align: left;
+    font-family: 'Pixels', sans-serif;
+    font-size: 30px;
+}
+.sidebarTitle{
+    padding-left: 20rem;
+    text-align: 50px;
+    margin-left: auto;
 }
