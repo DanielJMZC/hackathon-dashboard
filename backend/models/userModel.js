@@ -5,10 +5,11 @@ import { db } from '../db.js';
 export async function createUser(username, email, plainPassword) {
   try {
     const passwordHash = await hashPassword(plainPassword);
+    const now = new Date();
 
     const [result] = await db.query(
-      'INSERT INTO users (name, email, hashed_password, xp, idLevel) VALUES (?, ?, ?, 0, 1)',
-      [username, email, passwordHash]
+      'INSERT INTO users (name, email, hashed_password, xp, idLevel, gold, created_at, updated_at) VALUES (?, ?, ?, 0, 1, 0, ?, ?)',
+      [username, email, passwordHash, now, now]
     );
 
     return result.insertId;
@@ -87,6 +88,8 @@ export async function updateUser(userId, updates) {
     if (results.affectedRows === 0) {
       throw new Error('User not found or no changes made');
     }
+
+    await updateDate(userId);
   } catch (err) {
       console.error('Database error in updateUser:', err.message);
       throw new Error('Failed to update user');
@@ -115,6 +118,8 @@ export async function updateXP(userId, xpToAdd) {
       throw new Error('User not found or no changes made');
     }
 
+    await updateDate(userId);
+
     return xpUpdated;
 
   } catch (err) {
@@ -133,6 +138,9 @@ export async function updateLevel(userId, idLevel) {
     if (results.affectedRows === 0) {
       throw new Error('User not found or no changes made');
     }
+
+    await updateDate(userId);
+
   } catch (err) {
       console.error('Database error in updateUser:', err.message);
       throw new Error('Failed to update user');
@@ -152,6 +160,9 @@ export async function changePassword(userId, newPassword) {
     if (results.affectedRows === 0) {
       throw new Error('User not found or no changes made');
     }
+
+    await updateDate(userId);
+
   } catch (err) {
       console.error('Database error in changePassword:', err.message);
       throw new Error('Failed to change password');
@@ -176,5 +187,23 @@ export async function deleteUser(userId) {
       throw new Error('Failed to delete user');
   }
 
+}
+
+async function updateDate(userId) {
+  try {
+    const now = new Date();
+
+    const [rows] = await db.query(
+      'UPDATE users SET updated_at = ? WHERE id = ?',
+      [now, userId]
+    );
+
+    if (rows.affectedRows === 0) {
+        throw new Error('User not found or no changes made');
+      }
+  } catch (err) {
+      console.error('Database error in updateDate:', err.message);
+      throw new Error('Failed to update date');
+  }
 }
 

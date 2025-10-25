@@ -80,7 +80,7 @@ export async function updateMission(missionId, name, rewardXp, rewardGold, descr
 }
 
 export async function updateMissionStatus(user_id, missionId, status){
-
+  
 }
 
 export async function deleteMission(missionId){

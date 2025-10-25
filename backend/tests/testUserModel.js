@@ -2,7 +2,11 @@ import {createUser, getUserById, getUserByEmail, getAllUsers, updateUser, update
 
 async function runTests() {
   try {
-    await deleteUser(3);
+    const updates = {
+      name: "Santa",
+      email: "santaclaus@gmail.com",
+    }
+    updateUser(5, updates);
      
   } catch (err) {
     console.error('Error:', err.message);
