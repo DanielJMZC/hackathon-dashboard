@@ -21,3 +21,5 @@ async function testConnection() {
       console.error('DB connection error:', err.message);
   }
 }
+testConnection()
+

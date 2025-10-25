@@ -1,0 +1,8 @@
+{
+  "name": "hackathon-dashboard-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0"
+  }
+}
