@@ -1,6 +1,6 @@
 import { db } from '../db.js';
 import * as badgesModel from '../models/badgesModel.js';
-import * as userBadgesModel from './models/userBadgeModel.js';
+import * as userBadgesModel from '../models/userBadgeModel.js';
 
 //////////////////////////////
 // Asignar una badge a un usuario

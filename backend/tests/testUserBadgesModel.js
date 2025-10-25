@@ -7,11 +7,11 @@ import * as userBadgeModel from '../models/userBadgeModel.js';
 async function runBadgeServiceTest() {
   try {
     console.log('--- Creando usuario ---');
-    const userId = await createUser({
-      name: "Diego Test",
-      email: "diegotest@example.com",
-      password: "123456"
-    });
+    const userId = await createUser(
+  "Diego Test",       // username
+  "diegotest@example.com", // email
+  "123456"            // plainPassword
+);
     console.log('Usuario creado con ID:', userId);
 
     console.log('--- Creando badge ---');
