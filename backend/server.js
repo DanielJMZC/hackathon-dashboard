@@ -3,7 +3,12 @@ import 'dotenv/config';
 import userRoutes from './routes/userRoutes.js'
 import missionRoutes from './routes/missionRoutes.js'
 import transactionRoutes from './routes/transactionRoutes.js'
-import badgesRoutes from './routes/badgeRoutes.js'
+import badgesRoutes from './routes/badgesRoutes.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());

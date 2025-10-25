@@ -1,6 +1,6 @@
-import * as userService from '..services/userService.js';
+import * as userService from '../services/userService.js';
 
-export async function register(req, res) {
+const register = async(req, res) => {
     try {
         const {username, email, password} = req.body;
         await userService.registerUser(username, email, password);
@@ -8,9 +8,9 @@ export async function register(req, res) {
     } catch (err) {
         res.status(400).json({error: err.message});
     }
-}
+};
 
-export async function login(req, res) {
+const login = async(req, res) => {
     try {
         const {email, password} = req.body;
         const result = await userService.loginUser(email, password);
@@ -18,9 +18,9 @@ export async function login(req, res) {
     } catch (err) {
     res.status(400).json({error: err.message});
     }
-}
+};
 
-export async function addXP(req, res) {
+const addXP = async(req, res) => {
     try {
         const {userId, xp} = req.body;
         await userService.awardService(userId, xp);
@@ -28,9 +28,9 @@ export async function addXP(req, res) {
     } catch (err) {
     res.status(400).json({error: err.message});
     }
-}
+};
 
-export async function addGold(req, res) {
+const addGold = async(req, res) => {
     try {
         const {userId, gold} = req.body;
         await userService.awardService(userId, gold);
@@ -39,9 +39,9 @@ export async function addGold(req, res) {
     } catch (err) {
     res.status(400).json({error: err.message});
     }
-}
+};
 
-export async function getUser(req, res) {
+const getUser = async(req, res) => {
     try {
         const {userId} = req.body;
         await userService.getUser(userId);
@@ -49,4 +49,12 @@ export async function getUser(req, res) {
     } catch (err) {
     res.status(400).json({error: err.message});
     }
+};
+
+export default {
+    register,
+    login,
+    addXP,
+    addGold,
+    getUser
 }

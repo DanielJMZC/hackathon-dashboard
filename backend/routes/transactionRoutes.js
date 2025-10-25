@@ -1,19 +1,16 @@
 import express from 'express';
-import * as transactionController from '../controllers/transactionController.js';
+import transactionController from '../controllers/transactionController.js';
 import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 // POST /transactions/add
-router.post('/add', authenticateToken, transactionController.addTransaction);
+router.post('/users/:user_id/xp', authenticateToken, transactionController.awardMissionXP);
 
-// GET /transactions/user/:id
-router.get('/user/:id', authenticateToken, transactionController.getTransactionsByUser);
+// POST /transactions/add
+router.post('/users/:user_id/gold', authenticateToken, transactionController.awardMissionGold);
 
-// PUT /transactions/update/:id
-router.put('/update/:id', authenticateToken, transactionController.updateTransaction);
-
-// DELETE /transactions/delete/:id
-router.delete('/delete/:id', authenticateToken, transactionController.deleteTransaction);
+// GET /transactions/update/:id
+router.get('/users/:user_id/transactions', authenticateToken, transactionController.getTransactionByUser);
 
 export default router;

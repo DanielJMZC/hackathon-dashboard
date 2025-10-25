@@ -1,6 +1,6 @@
-import * as transactionService from '../services/transactionsService.js';
+import * as transactionService from '../services/transactionService.js';
 
-export async function awardMissionXP(req, res) {
+const awardMissionXP = async(req, res) => {
   try {
     const { userId, missionId } = req.body;
     await transactionService.awardMissionXP(userId, missionId);
@@ -8,9 +8,9 @@ export async function awardMissionXP(req, res) {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-}
+};
 
-export async function awardMissionGold(req, res) {
+const awardMissionGold = async(req, res) => {
   try {
     const { userId, missionId } = req.body;
     await transactionService.awardMissionGold(userId, missionId);
@@ -21,7 +21,7 @@ export async function awardMissionGold(req, res) {
 }
 
 
-export async function getTransactionsByUser(req, res) {
+const getTransactionByUser = async(req, res) => {
   try {
     const { userId } = req.params;
     const transactions = await transactionService.getTransactionsByUser(userId);
@@ -29,5 +29,11 @@ export async function getTransactionsByUser(req, res) {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+};
+
+export default {
+  awardMissionXP,
+  awardMissionGold,
+  getTransactionByUser
 }
 
