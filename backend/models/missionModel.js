@@ -3,9 +3,11 @@ import { db } from '../db.js';
 
 export async function createMission(userId, description, rewardXp, rewardGold, name, expiration) {
 try {
+  const now = new Date();
+  const status = 'on_going';
   const [result] = await db.query(
-    'INSERT INTO mission (user_id, description, reward_xp, status, reward_gold, created_at, completed_at, name, expiration_in) VALUES (?, ?, ?, on_going, false, ?, NOW(), NULL, ?, ?)',
-    [userId, description, rewardXp, rewardGold, name, expiration]
+    'INSERT INTO mission (user_id, description, reward_xp, reward_gold, created_at, name, expiration_in, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    [userId, description, rewardXp, rewardGold, now, name, expiration, status]
   );
 
   return result.insertId;
@@ -79,22 +81,63 @@ export async function updateMission(missionId, name, rewardXp, rewardGold, descr
   }
 }
 
-export async function updateMissionStatus(user_id, missionId, status){
-  
+export async function updateMissionStatus(missionId, status){
+  try {
+    const [rows] = await db.query(
+      'UPDATE mission SET status = ? WHERE id = ?',
+      [status, missionId]
+    );
+
+    if (rows.affectedRows === 0) {
+      throw new Error('User not found or no changes made');
+    }
+
+  } catch (err) {
+    console.error('Database error in updateMissionStatus:', err.message);
+    throw new Error('Failed to update mission status')
+  }
+
 }
 
 export async function deleteMission(missionId){
+  try {
+    const [results] = await db.query(
+        'DELETE FROM mission WHERE id = ?',
+        [missionId]
+      );
+
+
+      if (results.affectedRows === 0) {
+        throw new Error('User not found or no changes made');
+      }
+
+  } catch (err) {
+    console.error('Database error in delete mission:', err.message);
+    throw new Error('Failed to delete mission')
+  }
 
 }
 
-export async function assignMissionToUser(userId, missionId){
+export async function getCompletedMissions(missionId){
+  try {
+    const status = 'completed';
 
-}
+    const [rows] = await db.query(
+      'SELECT * FROM mission WHERE id = ? AND status = ?',
+      [missionId, status]
+    );
 
-export async function getCompletedMissions(userID){
+    return rows;
+
+  } catch (err) {
+    console.error('Database error in get completed missions:', err.message);
+    throw new Error('Failed to get completed missions')
+
+  }
 
 }
 
 export async function awardMissionReward(userId, missionId){
+  //Using transaction model :)
 
 }
