@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import { db } from '../db.js';
 
 export async function createMission(userId, description, rewardXp, rewardGold, name, expiration) {
@@ -123,7 +122,7 @@ export async function getCompletedMissions(missionId){
     const status = 'completed';
 
     const [rows] = await db.query(
-      'SELECT * FROM mission WHERE id = ? AND status = ?',
+      'SELECT * FROM mission WHERE id = ?  AND status = ?'
       [missionId, status]
     );
 
@@ -134,10 +133,5 @@ export async function getCompletedMissions(missionId){
     throw new Error('Failed to get completed missions')
 
   }
-
-}
-
-export async function awardMissionReward(userId, missionId){
-  //Using transaction model :)
 
 }

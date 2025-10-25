@@ -25,7 +25,7 @@ async function hashPassword(plainPassword) {
   return hash;
 }
 
-async function verifyPassword(plainPassword, hash) {
+export async function verifyPassword(plainPassword, hash) {
   return await bcrypt.compare(plainPassword, hash);
 }
 
@@ -96,7 +96,7 @@ export async function updateUser(userId, updates) {
   }
 }
 
-export async function updateXP(userId, xpToAdd) {
+export async function updateXP(userId, xp) {
    try {
 
     const [rows] = await db.query(
@@ -108,10 +108,9 @@ export async function updateXP(userId, xpToAdd) {
         throw new Error('User not found');
     }
 
-    const xpUpdated = rows[0].xp + xpToAdd;
     const [results] = await db.query(
       'UPDATE users SET xp = ? WHERE id = ?',
-      [xpUpdated, userId]
+      [xp, userId]
     );
 
     if (results.affectedRows === 0) {
@@ -120,7 +119,7 @@ export async function updateXP(userId, xpToAdd) {
 
     await updateDate(userId);
 
-    return xpUpdated;
+    return xp;
 
   } catch (err) {
       console.error('Database error in updateUser:', err.message);
@@ -189,7 +188,7 @@ export async function deleteUser(userId) {
 
 }
 
-async function updateDate(userId) {
+export async function updateDate(userId) {
   try {
     const now = new Date();
 
