@@ -1,11 +1,18 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const db = require('./db');
+import express from 'express';
+import 'dotenv/config';
+import userRoutes from './routes/userRoutes.js'
+import missionRoutes from './routes/missionRoutes.js'
+import transactionRoutes from './routes/transactionRoutes.js'
+import badgesRoutes from './routes/badgeRoutes.js'
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+
+//Mount routers
+app.use('api/users', userRoutes);
+app.use('api/missions', missionRoutes);
+app.use('api/transaction', transactionRoutes);
+app.use('api/badges', badgesRoutes);
 
 // Serve frontend folder
 app.use(express.static(path.join(__dirname, '../frontend')));
