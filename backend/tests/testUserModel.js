@@ -1,9 +1,11 @@
-import { createUser} from '../models/userModel.js';
+import { createUser, getUserById} from '../models/userModel.js';
 
 async function runTests() {
   try {
-    const newUserId = await createUser('TestUser', 'test@example.com', 'password123');
-    console.log('Created user ID:', newUserId);
+      const user = await getUserById(1);
+
+  
+    console.log(user.name);
 
   } catch (err) {
     console.error('Error:', err.message);
