@@ -1,0 +1,43 @@
+.sidebar{
+    background-color: rgb(174, 214, 249);
+    width: max-content;
+    border-radius: 10px;
+    padding: 2rem 1rem;
+}
+
+.sidebarList {
+    list-style: none;
+    padding: 0;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+
+}
+
+.sidebarElement{
+    padding: .8rem 1.3rem;
+    border-radius:3px;
+
+    display: grid;
+    align-items: center;
+    grid-template-columns: 40px 1fr;
+    color: #526581;
+}
+
+.sidebarElement:not(.sidebarElement--logo):hover{
+    background-color: chocolate;
+    color: rgb(205, 146, 104);
+    fill:rgb(205, 146, 104);
+    cursor: pointer;
+}
+
+.sidebarElement:not(.sidebarElement--logo){
+    margin-bottom: 1rem;
+}
+
+/*falta carga logos para cada opcion*/
+
+.sidebar_hide{
+    overflow: hidden;
+}
