@@ -1,21 +1,32 @@
 @font-face {
     font-family: 'Pixels';
     src: url("./Fonts/Game.otf");
-
+}
+@font-face {
     font-family: 'Maestro';
     src: url("./Fonts/Maestro.otf")
 }
 
 h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     font-family: 'Maestro', sans-serif;
-    font-size: 30px;
+    font-size: 200px;
+    text-align: center;
+    transform: translate(-50%, -80%);
+    color: rgb(221, 188, 1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 .sidebar{
+    position: fixed;
+    top:0;
+    left: 0;
     background-color: rgb(180, 216, 57);
     width: max-content;
     border-radius: 10px;
     padding: 1rem 1rem;
-    height: 645px;
+    height: 660px;
 }
 
 .sidebarText {
