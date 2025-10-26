@@ -62,9 +62,22 @@
         <li class="sidebarElement" >
           <img src="./Assets/logout.svg" class = "sidebarIcon">
           <div class="sidebarHide">
-            <a href="login.html" class="sidebarText">Log out</a>
+            <a href="#" class="sidebarText" id="logoutBtn">Log out</a>
           </div>
         </li>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            logoutBtn.addEventListener("click", (e) => {
+              e.preventDefault();          // Prevent default link navigation
+              localStorage.removeItem("token"); 
+               localStorage.removeItem("user");  // Delete the token
+              window.location.href = "login.html"; // Redirect to login
+            });
+          });
+        </script>
         <!--Quinta opción - return button-->
         <li class="sidebarElement">
           <!-- Icono de return-->

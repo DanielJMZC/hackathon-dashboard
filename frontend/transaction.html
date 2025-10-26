@@ -22,7 +22,7 @@
             <div class="addGasto">
                 <input type="text" id="inputReasonTrans" placeholder="Reason of transaction">
                 <input type="text" id="inputBoxTrans" placeholder="Amount for the transaction">
-                <button onclick="addTransac()">Add</button> <!--onclick="funcion para agregar transacción"-->
+                <button id=addTransactionBTN>Add</button> 
             </div>
             <ul id="transContainer">
 
@@ -87,40 +87,7 @@
         </li>
       </ul>
     </aside>
-
-    <script> 
-        const inputReason = document.getElementById("inputReasonTrans");
-        const inputAmount = document.getElementById("inputBoxTrans");
-        const transContainer = document.getElementById("transContainer");
-        const saldoTotal = document.getElementById("saldoTotal");
-
-        let saldo = 0;
-
-        function addTransac() {
-          const reason = inputReason.value.trim();
-          const amount = parseFloat(inputAmount.value.trim());
-
-          const card = document.createElement("li");
-          card.classList.add("transCard");
-          card.dataset.amount = amount;
-          
-          card.innerHTML = `
-          <div class="trans-content">
-          <p class="trans-reason">${reason || "Sin descripción"}</p>
-          <p class="trans-amount">${amount >= 0 ? "+" : ""}$${amount.toFixed(2)}</p>
-          </div>
-          `;
-
-          transContainer.appendChild(card);
-          
-          // Actualizar saldo
-          saldo += amount;
-          saldoTotal.textContent = `Saldo actual: $${saldo.toFixed(2)}`;
-
-          
-          inputReason.value = "";
-          inputAmount.value = "";
-        }
-    </script>
 </body>
 </html>
+<script src="js/transactions.js"></script>
+

@@ -58,10 +58,10 @@ const addMoney= async(req, res) => {
 const getUser = async(req, res) => {
     try {
         const userId = req.user.id;
-        await userService.getUser(userId);
-        res.status(200).json({message: 'User succesfully sent'});
+        const user = await userService.getUser(userId); // store result
+        res.status(200).json(user); // send full user object
     } catch (err) {
-    res.status(400).json({error: err.message});
+        res.status(400).json({error: err.message});
     }
 };
 
@@ -70,5 +70,6 @@ export default {
     login,
     addXP,
     addGold,
+    addMoney,
     getUser
 }

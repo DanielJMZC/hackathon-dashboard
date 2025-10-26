@@ -22,6 +22,22 @@ const awardMissionGold = async(req, res) => {
   }
 }
 
+const awardSimulatorMoney = async(req, res) => {
+  try {
+    const userId = req.user.id;
+    const { amount } = req.body;
+
+    const transaction = await transactionService.moneySimulatorTransaction(userId, amount);
+
+    console.log('Transaction added:', transaction);
+
+    res.status(200).json({ message: 'Transaction added', transaction });
+  } catch (err) {
+    console.error('Controller error:', err);
+    res.status(500).json({ error: 'Failed to add transaction' });
+  }
+};
+
 
 const getTransactionByUser = async(req, res) => {
   try {
@@ -36,6 +52,7 @@ const getTransactionByUser = async(req, res) => {
 export default {
   awardMissionXP,
   awardMissionGold,
+  awardSimulatorMoney,
   getTransactionByUser
 }
 
