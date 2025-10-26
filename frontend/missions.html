@@ -148,7 +148,54 @@
       <button id="declineBtn">Decline</button>
     </div>
   </div>
+  <!--Sidebar-->
+        <aside class="sidebar">
+          <ul class = "sidebarList">
 
-  <script src="./missions.js"></script>
+            <!-- Primera opcion del sidebar (...)-->
+            <li class="sidebarElement">
+              <!-- Icono de missions-->
+              <img src="./Assets/scroll3.svg" class="sidebarIcon">
+              <div class="sidebarHide">
+                <p class="sidebarText"> Missions</p>
+              </div>
+            </li>
+
+            <!--Segunda opcion - badge-->
+            <li class="sidebarElement">
+              <!-- Icono de badge-->
+              <img src="./Assets/badge.svg" class="sidebarIcon">
+              <div class="sidebarHide">
+                <a href="logros.html" class="sidebarText">Badges</a>
+              </div>
+            </li>
+
+            <!--Tercera opcion - transactions-->
+            <li class="sidebarElement">
+              <!-- Icono de transaction-->
+              <img src="./Assets/money.svg" class="sidebarIcon">
+
+          <div class="sidebarHide">
+            <a href="transaction.html" class="sidebarText">Transactions</a>
+          </div>
+        </li>
+        <!--Log out-->
+        <li class="sidebarElement" >
+          <img src="./Assets/logout.svg" class = "sidebarIcon">
+          <div class="sidebarHide">
+            <a href="login.html" class="sidebarText">Log out</a>
+          </div>
+        </li>
+        <!--Quinta opción - return button-->
+        <li class="sidebarElement">
+          <!-- Icono de return-->
+          <img src="./Assets/leftarrow.svg" class="sidebarIcon">
+          <div class="sidebarHide">
+            <a href="index.html" class="sidebarText">Return</a>
+          </div>
+        </li>
+      </ul>
+    </aside>
 </body>
 </html>
+<script src="./missions.js"></script>
