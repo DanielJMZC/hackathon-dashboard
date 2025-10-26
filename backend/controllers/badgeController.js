@@ -1,0 +1,52 @@
+// controllers/badgeController.js
+import * as badgeService from '../services/badgeService.js';
+
+// 1️⃣ Listar todas las badges disponibles
+const getAllBadges = async(req, res) => {
+  try {
+    const badges = await badgeService.getAllBadges();
+    res.status(200).json(badges);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// 2️⃣ Listar todas las badges de un usuario
+const getUserBadges = async(req, res) => {
+  try {
+    const { userId } = req.params; // se recibe por URL, ej: /users/:userId/badges
+    const badges = await badgeService.getUserBadges(Number(userId));
+    res.status(200).json(badges);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// 3️⃣ Asignar una badge a un usuario
+const awardBadge = async(req, res) => {
+  try {
+    const { userId, badgeId } = req.body; // se recibe por POST
+    const result = await badgeService.awardBadgeToUser(Number(userId), Number(badgeId));
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// 4️⃣ Contar cuántas badges tiene un usuario
+const countUserBadges = async(req, res) => {
+  try {
+    const { userId } = req.params;
+    const count = await badgeService.countUserBadges(Number(userId));
+    res.status(200).json({ userId: Number(userId), badgeCount: count });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export default {
+  getAllBadges,
+  getUserBadges,
+  awardBadge,
+  countUserBadges
+};

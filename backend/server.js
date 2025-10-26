@@ -1,11 +1,23 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const db = require('./db');
+import express from 'express';
+import 'dotenv/config';
+import userRoutes from './routes/userRoutes.js'
+import missionRoutes from './routes/missionRoutes.js'
+import transactionRoutes from './routes/transactionRoutes.js'
+import badgesRoutes from './routes/badgesRoutes.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+
+//Mount routers
+app.use('/api/users', userRoutes);
+app.use('/api/missions', missionRoutes);
+app.use('/api/transaction', transactionRoutes);
+app.use('/api/badges', badgesRoutes);
 
 // Serve frontend folder
 app.use(express.static(path.join(__dirname, '../frontend')));
@@ -15,12 +27,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Example API
-app.post('/add-xp', (req, res) => {
-  const { userId, xpGain } = req.body;
-  res.json({ status: 'success', userId, xpGain });
-});
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
