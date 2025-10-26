@@ -97,6 +97,29 @@
     button:hover {
       background-color: #444;
     }
+
+    /* I ADDED THIS! :D */
+    .mission-action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .cancel-btn {
+      background-color: #a33;
+    }
+
+    .cancel-btn:hover {
+      background-color: #c44;
+    }
+
+    .completed-btn {
+      background-color: #3a3;
+    }
+
+    .completed-btn:hover {
+      background-color: #4c4;
+    }
   </style>
 </head>
 
@@ -113,7 +136,13 @@
       <strong>Gold:</strong> <span id="exampleMissionGold">0</span><br>
       <strong>Difficulty:</strong> <span id="exampleMissionDifficulty">---</span><br>
       <strong>Category:</strong> <span id="exampleMissionCategory">---</span><br>
-      <strong>Expiration Date:</strong> <span id="exampleMissionExp">---</span>
+      <strong>Expiration Date:</strong> <span id="exampleMissionExp">---</span><br>
+
+      <!-- I ADDED THIS! :D -->
+      <div class="mission-action-buttons">
+        <button class="completed-btn">Completed</button>
+        <button class="cancel-btn">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -135,32 +164,25 @@
 
     <div class="mission-box" id="missionBox">
       <div class="mission-field">
-        <strong>Mission Description:</strong>
-        <span id="missionDescription">---</span>
+        <strong>Mission Description:</strong> <span id="missionDescription">---</span>
       </div>
       <div class="mission-field">
-        <strong>Mission Name:</strong>
-        <span id="missionName">---</span>
+        <strong>Mission Name:</strong> <span id="missionName">---</span>
       </div>
       <div class="mission-field">
-        <strong>XP:</strong>
-        <span id="missionXP">0</span>
+        <strong>XP:</strong> <span id="missionXP">0</span>
       </div>
       <div class="mission-field">
-        <strong>Gold:</strong>
-        <span id="missionGold">0</span>
+        <strong>Gold:</strong> <span id="missionGold">0</span>
       </div>
       <div class="mission-field">
-        <strong>Difficulty:</strong>
-        <span id="missionDifficulty">---</span>
+        <strong>Difficulty:</strong> <span id="missionDifficulty">---</span>
       </div>
       <div class="mission-field">
-        <strong>Category:</strong>
-        <span id="missionCategory">---</span>
+        <strong>Category:</strong> <span id="missionCategory">---</span>
       </div>
       <div class="mission-field">
-        <strong>Expiration Date:</strong>
-        <span id="missionExp">---</span>
+        <strong>Expiration Date:</strong> <span id="missionExp">---</span>
       </div>
     </div>
 
