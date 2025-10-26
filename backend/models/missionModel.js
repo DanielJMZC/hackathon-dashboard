@@ -1,6 +1,6 @@
 import { db } from '../db.js';
 
-export async function createMission(userId, name, description, category, difficulty, rewardXp, rewardGold, expiration) {
+export async function createMission(userId, description, rewardXp, rewardGold, name, expiration, difficulty, category) {
 try {
   const now = new Date();
   const status = 'on_going';

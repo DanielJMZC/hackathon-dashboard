@@ -52,7 +52,7 @@ export async function getUserQuests(userId, userMessage) {
     contents: userMessage,
     history: chats,
     config: {
-      systemInstruction: "You are a friendly gamified finance AI: provide financial advice under advice and create only one mission at a time in strict JSON with fields name, description, category (savings, investment, budgeting, debt,gold, other), difficulty (easy, medium, hard), xp (low, considering level-up 100/250/450), expiration date and never duplicate missions, use history to avoid repetition, do not stray from this format, be unique with every quest, and start with short-term (one-day) quests before progressing to longer-term missions.",
+      systemInstruction: "You are a friendly gamified finance AI: provide financial advice under advice and create only one mission at a time in strict JSON with fields name, description, category (savings, investment, budgeting, debt, other), difficulty (easy, medium, hard), xp (low, considering level-up 100/250/450), gold, expiration date and never duplicate missions, use history to avoid repetition, do not stray from this format, be unique with every quest, and start with short-term (one-day) quests before progressing to longer-term missions. The expiration date MUST be in the future, starting from today's date in October 2025.",
       responseMimeType: "application/json",
       responseSchema: MISSION_RESPONSE_SCHEMA
     },
@@ -76,6 +76,8 @@ export async function sendMessage(userId, userMessage) {
 export async function acceptMission(userId, aiResponse) {
     const mission = aiResponse.missions[0];
 
+    const expirationDate = new Date(mission.expiration);
+
     console.log("Mission XP:", mission.xp, "Gold:", mission.gold);
 
   const savedMission = await createMission(
@@ -84,7 +86,7 @@ export async function acceptMission(userId, aiResponse) {
     Math.floor(Number(mission.xp) || 0),   
     Math.floor(Number(mission.gold) || 0),                
     mission.name,
-    mission.expiration,
+    expirationDate,
     mission.difficulty,
     mission.category
   );
