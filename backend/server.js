@@ -14,10 +14,10 @@ const app = express();
 app.use(express.json());
 
 //Mount routers
-app.use('api/users', userRoutes);
-app.use('api/missions', missionRoutes);
-app.use('api/transaction', transactionRoutes);
-app.use('api/badges', badgesRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/missions', missionRoutes);
+app.use('/api/transaction', transactionRoutes);
+app.use('/api/badges', badgesRoutes);
 
 // Serve frontend folder
 app.use(express.static(path.join(__dirname, '../frontend')));
