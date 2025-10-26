@@ -27,6 +27,7 @@ h1 {
     border-radius: 10px;
     padding: 1rem 1rem;
     height: 660px;
+    z-index: 10;
 }
 
 .sidebarText {
@@ -56,13 +57,19 @@ h1 {
     align-items: center;
     grid-template-columns: 40px 0px;
     column-gap: 0.5rem;
-    color: rgb(19, 120, 91);
+    background-color: rgb(180, 216, 57);
 }
 
 .sidebarIcon{
     width: 100%;
     overflow: hidden;
     justify-self: center;
+}
+
+.sidebarHide,
+.sidebarText,
+.sidebarTitle {
+  background-color: transparent;
 }
 
 /*Falta logo*/
@@ -174,7 +181,7 @@ ul, li{
     user-select: none;
     cursor: pointer;
     position: relative;
-    background: #fff;
+    background: transparent;
     margin-bottom: 4px;
     border-radius: 4px;
 }
