@@ -17,7 +17,7 @@ router.post('/:id/xp', authenticateToken, userController.addXP);
 router.put('/:id/gold', authenticateToken, userController.addGold);
 
 // GET /users/:id
-router.get('/:id', userController.getUser);
+router.get('/me', authenticateToken, userController.getUser);
 
 export default router;
 

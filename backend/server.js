@@ -4,6 +4,7 @@ import userRoutes from './routes/userRoutes.js'
 import missionRoutes from './routes/missionRoutes.js'
 import transactionRoutes from './routes/transactionRoutes.js'
 import badgesRoutes from './routes/badgesRoutes.js'
+import aiRoutes from "./routes/aiRoutes.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,6 +19,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/missions', missionRoutes);
 app.use('/api/transaction', transactionRoutes);
 app.use('/api/badges', badgesRoutes);
+app.use("/api/AI", aiRoutes);
+
 
 // Root route explicitly sends index.html
 app.get('/', (req, res) => {

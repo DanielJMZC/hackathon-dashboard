@@ -67,7 +67,7 @@ h1 {
 
 /*Falta logo*/
 
-.sidebarIconProfile{
+.sidebarIconLogout{
     width: 40px;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -96,7 +96,7 @@ h1 {
     overflow: hidden;
 }
 
-.sidebarElementProfile{
+.sidebarElementLogout{
     margin-top: 100px;
     text-wrap: nowrap;
     text-align: left;

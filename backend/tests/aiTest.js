@@ -1,12 +1,10 @@
-import {getAIResponse} from '../services/aiService.js';
+import {sendMessage} from '../services/aiService.js';
 
 async function runTests() {
   try {
 
-    getAIResponse('Testing Testing! Reply back!')
-    .then(string => console.log(string))
-    .catch(err => console.error(err));
-    
+    await sendMessage(9, 'any quests for today');
+   
   } catch (err) {
     console.error('Error:', err.message);
   }

@@ -22,9 +22,9 @@ const login = async(req, res) => {
 
 const addXP = async(req, res) => {
     try {
-        const {id} = req.params;
-        const {xp} = req.body;
-        await userService.awardXP(id, xp);
+        const userId = req.user.id;
+        const { xp } = req.body;
+        await userService.awardXP(userId, xp);
         res.status(200).json({message: 'XP succesfully added'});
     } catch (err) {
     res.status(400).json({error: err.message});
@@ -33,9 +33,9 @@ const addXP = async(req, res) => {
 
 const addGold = async(req, res) => {
     try {
-        const {id} = req.params;
-        const {gold} = req.body;
-        await userService.awardGold(id, gold);
+        const userId = req.user.id;
+        const { gold } = req.body;
+        await userService.awardGold(userId, gold);
         res.status(200).json({message: 'Gold succesfully added'});
 
     } catch (err) {
@@ -45,8 +45,8 @@ const addGold = async(req, res) => {
 
 const getUser = async(req, res) => {
     try {
-        const {id} = req.params;
-        await userService.getUser(id);
+        const userId = req.user.id;
+        await userService.getUser(userId);
         res.status(200).json({message: 'User succesfully sent'});
     } catch (err) {
     res.status(400).json({error: err.message});
