@@ -79,6 +79,39 @@ export async function awardGold(userId, gold) {
     if (results.affectedRows === 0) {
       throw new Error('User not found or no changes made');
     }
+    
+
+    await updateDate(userId);
+
+  } catch (err) {
+      console.error('Database error in updateUser:', err.message);
+      throw new Error('Failed to award money');
+  }
+}
+
+export async function awardMoney(userId, money) {
+   try {
+     const [rows] = await db.query(
+      'SELECT * FROM users WHERE id = ?',
+      [userId]
+    );
+
+    const user = rows[0];
+
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+    user.balance += money;
+
+    const [results] = await db.query(
+      'UPDATE users SET balance = ? WHERE id = ?',
+      [user.balance, userId]
+    );
+
+    if (results.affectedRows === 0) {
+      throw new Error('User not found or no changes made');
+    }
 
     await updateDate(userId);
 

@@ -8,7 +8,7 @@ export async function createUser(username, email, plainPassword) {
     const now = new Date();
 
     const [result] = await db.query(
-      'INSERT INTO users (name, email, hashed_password, xp, idLevel, gold, created_at, updated_at) VALUES (?, ?, ?, 0, 1, 0, ?, ?)',
+      'INSERT INTO users (name, email, hashed_password, xp, idLevel, gold, created_at, updated_at, balance) VALUES (?, ?, ?, 0, 1, 0, ?, ?, 0)',
       [username, email, passwordHash, now, now]
     );
 

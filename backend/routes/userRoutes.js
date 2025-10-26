@@ -16,6 +16,9 @@ router.post('/:id/xp', authenticateToken, userController.addXP);
 // PUT /users/gold
 router.put('/:id/gold', authenticateToken, userController.addGold);
 
+// PUT /users/money
+router.put('/:id/money', authenticateToken, userController.addGold);
+
 // GET /users/:id
 router.get('/me', authenticateToken, userController.getUser);
 

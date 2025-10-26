@@ -43,6 +43,18 @@ const addGold = async(req, res) => {
     }
 };
 
+const addMoney= async(req, res) => {
+    try {
+        const userId = req.user.id;
+        const { money } = req.body;
+        await userService.awardMoney(userId, money);
+        res.status(200).json({message: 'Money succesfully added'});
+
+    } catch (err) {
+    res.status(400).json({error: err.message});
+    }
+};
+
 const getUser = async(req, res) => {
     try {
         const userId = req.user.id;

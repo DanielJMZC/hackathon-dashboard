@@ -1,9 +1,7 @@
 import {getMissionById} from '../models/missionModel.js';
 import {getUserById} from '../models/userModel.js';
 import {addTransaction, getUserTransactions} from '../models/transactionModel.js';
-import {awardXP, awardGold} from '../services/userService.js';
-
-
+import {awardXP, awardGold, awardMoney} from '../services/userService.js';
 
 
 export async function awardMissionXP(userId, missionId) {
@@ -24,6 +22,12 @@ export async function awardMissionGold(userId, missionId) {
   const rows = await addTransaction(userId, 2, mission.reward_gold, string, missionId);
   user.gold += mission.reward_gold;
   await awardGold(userId, mission.reward_gold);
+}
+
+export async function moneySimulatorTransaction(userId, amount) {
+  const string = 'Simulator Transaction'
+  const rows = await addTransaction(userId, 3, amount, string, null);
+  await awardMoney(userId, amount);
 }
 
 export async function getTransactionsByUser(userId) {
