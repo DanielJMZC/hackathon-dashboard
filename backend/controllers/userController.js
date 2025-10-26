@@ -2,8 +2,8 @@ import * as userService from '../services/userService.js';
 
 const register = async(req, res) => {
     try {
-        const {username, email, password} = req.body;
-        await userService.registerUser(username, email, password);
+        const {name, email, password} = req.body;
+        await userService.registerUser(name, email, password);
         res.status(200).json({message: 'Registered succesfully'});
     } catch (err) {
         res.status(400).json({error: err.message});
@@ -22,8 +22,9 @@ const login = async(req, res) => {
 
 const addXP = async(req, res) => {
     try {
-        const {userId, xp} = req.body;
-        await userService.awardService(userId, xp);
+        const {id} = req.params;
+        const {xp} = req.body;
+        await userService.awardXP(id, xp);
         res.status(200).json({message: 'XP succesfully added'});
     } catch (err) {
     res.status(400).json({error: err.message});
@@ -32,8 +33,9 @@ const addXP = async(req, res) => {
 
 const addGold = async(req, res) => {
     try {
-        const {userId, gold} = req.body;
-        await userService.awardService(userId, gold);
+        const {id} = req.params;
+        const {gold} = req.body;
+        await userService.awardGold(id, gold);
         res.status(200).json({message: 'Gold succesfully added'});
 
     } catch (err) {
@@ -43,8 +45,8 @@ const addGold = async(req, res) => {
 
 const getUser = async(req, res) => {
     try {
-        const {userId} = req.body;
-        await userService.getUser(userId);
+        const {id} = req.params;
+        await userService.getUser(id);
         res.status(200).json({message: 'User succesfully sent'});
     } catch (err) {
     res.status(400).json({error: err.message});

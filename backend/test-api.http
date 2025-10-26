@@ -1,0 +1,27 @@
+###Register User
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+    "username": "Daniel",
+    "email": "daniel@example.com",
+    "password": "123456"
+}
+
+###Login User
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "daniel@example.com",
+    "password": "123456"
+}
+
+###XP Add!
+POST http://localhost:3000/api/users/7/xp
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJkYW5pZWxAZXhhbXBsZS5jb20iLCJuYW1lIjoiRGFuaWVsIiwibGV2ZWwiOjEsImlhdCI6MTc2MTQzNzM5OSwiZXhwIjoxNzYxNDQwOTk5fQ.cODpCIuUfmr4r7oDsN-e6L7sRlMEcWMnVwsfwCq6H3U
+
+{
+    "xp": 100
+}

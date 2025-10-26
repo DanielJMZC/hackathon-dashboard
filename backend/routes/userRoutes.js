@@ -11,13 +11,13 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 
 // PUT /users/xp
-router.post('/xp', authenticateToken, userController.addXP);
+router.post('/:id/xp', authenticateToken, userController.addXP);
 
 // PUT /users/gold
-router.put('/gold', authenticateToken, userController.addGold);
+router.put('/:id/gold', authenticateToken, userController.addGold);
 
 // GET /users/:id
-router.get('users/:id', userController.getUser);
+router.get('/:id', userController.getUser);
 
 export default router;
 
