@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     if (!res.ok) throw new Error("Failed to fetch user");
     user = await res.json();
-    console.log("Current user:", user);
   } catch (err) {
     console.error(err);
     alert("Cannot fetch user data, log in again");
@@ -22,8 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  const userId = user._id || user.id; 
-
+  const userId = user._id || user.id;
   const missionForm = document.querySelector(".mission-form");
   const missionInput = document.getElementById("missionInput");
   const aiResponse = document.getElementById("aiResponse");
@@ -65,11 +63,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       missionDescription.textContent = mission.description;
       missionName.textContent = mission.name;
-      missionXP.textContent = mission.xp;
-      missionGold.textContent = mission.gold;
+      missionXP.textContent = mission.xp ?? mission.reward_xp;
+      missionGold.textContent = mission.gold ?? mission.reward_gold;
       missionDifficulty.textContent = mission.difficulty;
       missionCategory.textContent = mission.category;
-      missionExp.textContent = new Date(mission.expiration).toLocaleString();
+      missionExp.textContent = new Date(mission.expiration ?? mission.expiration_in).toLocaleString();
 
       aiResponse.querySelector("p").textContent = data.advice || "Mission generated!";
     } catch (err) {
@@ -78,63 +76,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-
-acceptBtn.addEventListener("click", async () => {
-  if (!currentMission) {
-    alert("No mission to accept! Generate one first.");
-    return;
-  }
-
-  try {
-    const res = await fetch("/api/AI/accept", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        aiResponse: {
-          missions: [currentMission.mission],
-          advice: currentMission.advice
-        }
-      })
-    });
-
-    if (!res.ok) throw new Error("Failed to accept mission");
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
-
-    alert(`Mission accepted: ${data.mission.name}`);
-
-    // Clear right panel
-    aiResponse.querySelector("p").textContent = "";
-    missionDescription.textContent = "";
-    missionName.textContent = "";
-    missionXP.textContent = "";
-    missionGold.textContent = "";
-    missionDifficulty.textContent = "";
-    missionCategory.textContent = "";
-    missionExp.textContent = "";
-    currentMission = null;
-
-    // Reload user's missions dynamically
-    await loadUserMissions();
-  } catch (err) {
-    console.error(err);
-    alert("Error accepting mission.");
-  }
-});
-
-
-  declineBtn.addEventListener("click", () => {
+  acceptBtn.addEventListener("click", async () => {
     if (!currentMission) {
-      alert("No mission to decline! Generate one first.");
+      alert("No mission to accept! Generate one first.");
       return;
     }
 
-    alert(`Mission declined: ${currentMission.mission.name}`);
-    currentMission = null;
+    try {
+      const res = await fetch("/api/AI/accept", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          aiResponse: {
+            missions: [currentMission.mission],
+            advice: currentMission.advice
+          }
+        })
+      });
 
+      if (!res.ok) throw new Error("Failed to accept mission");
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      aiResponse.querySelector("p").textContent = "";
+      missionDescription.textContent = "";
+      missionName.textContent = "";
+      missionXP.textContent = "";
+      missionGold.textContent = "";
+      missionDifficulty.textContent = "";
+      missionCategory.textContent = "";
+      missionExp.textContent = "";
+      currentMission = null;
+
+      await loadUserMissions();
+    } catch (err) {
+      console.error(err);
+      alert("Error accepting mission.");
+    }
+  });
+
+  declineBtn.addEventListener("click", () => {
+    if (!currentMission) return;
+
+    currentMission = null;
     aiResponse.querySelector("p").textContent = "";
     missionDescription.textContent = "";
     missionName.textContent = "";
@@ -145,7 +132,6 @@ acceptBtn.addEventListener("click", async () => {
     missionExp.textContent = "";
   });
 
-
   async function loadUserMissions() {
     try {
       const res = await fetch(`/api/missions/users/${userId}/missions`, {
@@ -153,21 +139,60 @@ acceptBtn.addEventListener("click", async () => {
       });
       if (!res.ok) throw new Error("Failed to fetch missions");
 
-      const missions = await res.json();
-      console.log("User missions:", missions);
+      let missions = await res.json();
+      missions = missions.filter(m => m.status === "on_going");
 
-      // Render dynamically
       missionsContainer.innerHTML = missions.map(mission => `
-        <div class="mission-entry">
+        <div class="mission-entry" data-id="${mission._id || mission.id}">
           <strong>Name:</strong> ${mission.name}<br>
           <strong>Description:</strong> ${mission.description}<br>
-          <strong>XP:</strong> ${mission.xp}<br>
-          <strong>Gold:</strong> ${mission.gold}<br>
+          <strong>XP:</strong> ${mission.reward_xp}<br>
+          <strong>Gold:</strong> ${mission.reward_gold}<br>
           <strong>Difficulty:</strong> ${mission.difficulty}<br>
           <strong>Category:</strong> ${mission.category}<br>
-          <strong>Expires:</strong> ${new Date(mission.expiration).toLocaleString()}<br>
+          <strong>Expires:</strong> ${new Date(mission.expiration_in).toLocaleString()}<br>
+          <button class="complete-btn">Complete</button>
+          <button class="remove-btn">Remove</button>
         </div>
       `).join('');
+
+      missionsContainer.querySelectorAll(".complete-btn").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          const missionId = e.target.parentElement.dataset.id;
+          try {
+            await fetch("/api/missions/completeMission", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+              body: JSON.stringify({ missionId })
+            });
+            await fetch("/api/badges/award", {
+              method: "POST",
+              headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+              body: JSON.stringify({ badgeId: "complete_mission", userId })
+            });
+            await loadUserMissions();
+          } catch (err) {
+            console.error(err);
+          }
+        });
+      });
+
+      missionsContainer.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          const missionId = e.target.parentElement.dataset.id;
+          try {
+            await fetch(`/api/missions/completeMission`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+              body: JSON.stringify({ missionId })
+            });
+            await loadUserMissions();
+          } catch (err) {
+            console.error(err);
+          }
+        });
+      });
+
     } catch (err) {
       console.error("Error loading missions:", err);
       missionsContainer.innerHTML = "<p>Error loading missions.</p>";
