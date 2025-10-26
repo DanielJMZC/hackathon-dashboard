@@ -43,13 +43,25 @@ const addGold = async(req, res) => {
     }
 };
 
+const addMoney= async(req, res) => {
+    try {
+        const userId = req.user.id;
+        const { money } = req.body;
+        await userService.awardMoney(userId, money);
+        res.status(200).json({message: 'Money succesfully added'});
+
+    } catch (err) {
+    res.status(400).json({error: err.message});
+    }
+};
+
 const getUser = async(req, res) => {
     try {
         const userId = req.user.id;
-        await userService.getUser(userId);
-        res.status(200).json({message: 'User succesfully sent'});
+        const user = await userService.getUser(userId); // store result
+        res.status(200).json(user); // send full user object
     } catch (err) {
-    res.status(400).json({error: err.message});
+        res.status(400).json({error: err.message});
     }
 };
 
@@ -58,5 +70,6 @@ export default {
     login,
     addXP,
     addGold,
+    addMoney,
     getUser
 }

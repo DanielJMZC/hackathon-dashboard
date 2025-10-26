@@ -3,11 +3,21 @@ import { db } from '../db.js';
 
 export async function addTransaction(userId, type_id, amount, description, missionId) {
     try {
+    
     const now = new Date();
-    const [result] = await db.query(
-        'INSERT INTO transactions (user_id, type_id, amount, description, mission_id, date) VALUES (?, ?, ?, ?, ?, ?)',
-        [userId, type_id, amount, description, missionId, now]
-    );
+
+    let result;
+    if (missionId!= null) {
+      [result] = await db.query(
+          'INSERT INTO transactions (user_id, type_id, amount, description, mission_id, date) VALUES (?, ?, ?, ?, ?, ?)',
+          [userId, type_id, amount, description, missionId, now]
+      );
+    } else {
+      [result] = await db.query(
+          'INSERT INTO transactions (user_id, type_id, amount, description, date) VALUES (?, ?, ?, ?, ?)',
+          [userId, type_id, amount, description, now]
+      );
+    }
 
     return result.id;
     } catch (err) {

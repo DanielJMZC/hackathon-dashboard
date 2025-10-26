@@ -10,6 +10,9 @@ router.post('/users/me/xp', authenticateToken, transactionController.awardMissio
 // POST /transactions/add
 router.post('/users/me/gold', authenticateToken, transactionController.awardMissionGold);
 
+// POST /transactions/add
+router.post('/users/me/money', authenticateToken, transactionController.awardSimulatorMoney);
+
 // GET /transactions/update/:id
 router.get('/users/me/transactions', authenticateToken, transactionController.getTransactionByUser);
 

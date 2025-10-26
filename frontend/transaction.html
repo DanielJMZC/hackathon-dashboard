@@ -22,7 +22,7 @@
             <div class="addGasto">
                 <input type="text" id="inputReasonTrans" placeholder="Reason of transaction">
                 <input type="text" id="inputBoxTrans" placeholder="Amount for the transaction">
-                <button onclick="addTransac()">Add</button> <!--onclick="funcion para agregar transacción"-->
+                <button id=addTransactionBTN>Add</button> 
             </div>
             <ul id="transContainer">
 
@@ -60,63 +60,20 @@
               <!-- Icono de transaction-->
               <img src="./Assets/money.svg" class="sidebarIcon">
 
-              <div class="sidebarHide">
-                <a href="transaction.html" class="sidebarText">Transactions</a>
-              </div>
-            </li>
-
-            <!--Log out-->
-            <li class="sidebarElement" >
-              <img src="./Assets/logout.svg" class = "sidebarIcon">
-              <div class="sidebarHide">
-                <a href="login.html" class="sidebarText">Log out</a>
-              </div>
-            </li>
-            <!--Quinta opción - return button-->
-            <li class="sidebarElement">
-              <!-- Icono de return-->
-              <img src="./Assets/leftarrow.svg" class="sidebarIcon">
-              <div class="sidebarHide">
-                <a href="index.html" class="sidebarText">Return</a>
-              </div>
-            </li>
-          </ul>
-        </aside>
-
-
-    <script> 
-        const inputReason = document.getElementById("inputReasonTrans");
-        const inputAmount = document.getElementById("inputBoxTrans");
-        const transContainer = document.getElementById("transContainer");
-        const saldoTotal = document.getElementById("saldoTotal");
-
-        let saldo = 0;
-
-        function addTransac() {
-          const reason = inputReason.value.trim();
-          const amount = parseFloat(inputAmount.value.trim());
-
-          const card = document.createElement("li");
-          card.classList.add("transCard");
-          card.dataset.amount = amount;
-          
-          card.innerHTML = `
-          <div class="trans-content">
-          <p class="trans-reason">${reason || "Sin descripción"}</p>
-          <p class="trans-amount">${amount >= 0 ? "+" : ""}$${amount.toFixed(2)}</p>
+          <div class="sidebarHide">
+            <a href="transaction.html" class="sidebarText">Transactions</a>
           </div>
-          `;
-
-          transContainer.appendChild(card);
-          
-          // Actualizar saldo
-          saldo += amount;
-          saldoTotal.textContent = `Saldo actual: $${saldo.toFixed(2)}`;
-
-          
-          inputReason.value = "";
-          inputAmount.value = "";
-        }
-    </script>
+        </li>
+        <!--Profile-->
+        <li class="sidebarElement  sidebarElementProfile">
+          <img src="./Assets/person.svg" class = "sidebarIcon sidebarIcon--profile">
+          <div class="sidebarHide">
+            <p class="sidebarTitle"> Profile</p>  
+          </div>
+        </li>
+      </ul>
+    </aside>
 </body>
 </html>
+<script src="js/transactions.js"></script>
+
