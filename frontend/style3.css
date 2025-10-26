@@ -104,7 +104,65 @@ h1 {
     font-size: 30px;
 }
 .sidebarTitle{
-    padding-left: 20rem;
+    padding-left: 0.5rem;
     text-align: 50px;
     margin-left: auto;
+}
+
+.sidebarText, .sidebarTitle {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+
+/*Estilizacion de pagina de transaction*/
+.container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 1px;
+}
+
+.addTransacciones {
+    width:100%;
+    max-width: 480px;
+    margin: 100px auto 20px;
+    padding: 40px 30px 60px;
+    border-radius: 10px;
+    background: rgba(161, 208, 252, 0.497);
+}
+
+.addTransacciones h2 {
+    color:rgb(255, 85, 0);
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.addGasto {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 10px;
+    font-size: 14px;
+}
+
+button {
+    border: 0;
+    padding: 16px 35px;
+    background: orange;
+    color: aliceblue;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 0px 5px 5px;
 }
