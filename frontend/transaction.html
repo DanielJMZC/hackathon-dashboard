@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Save the Money</title>
+  <title>Save the Money</title>                      
   <style> 
     body {
       margin: 0;
@@ -17,11 +17,11 @@
 <body>
     <div class="container">
         <div class="addTransacciones">
-            <h2>List of transactions</h2>
+            <h2>Transaction History</h2>
             <p id="saldoTotal">Saldo: $0</p>
             <div class="addGasto">
-                <input type="text" id="inputReasonTrans" placeholder="Add reason">
-                <input type="text" id="inputBoxTrans" placeholder="Add a transaction...">
+                <input type="text" id="inputReasonTrans" placeholder="Reason of transaction">
+                <input type="text" id="inputBoxTrans" placeholder="Amount for the transaction">
                 <button onclick="addTransac()">Add</button> <!--onclick="funcion para agregar transacción"-->
             </div>
             <ul id="transContainer">
@@ -100,10 +100,18 @@
           const reason = inputReason.value.trim();
           const amount = parseFloat(inputAmount.value.trim());
 
-          const li = document.createElement("li");
-          li.textContent = `${reason ? reason : "Sin descripción"}: ${amount >= 0 ? "+" : ""}$${amount.toFixed(2)}`;
-          transContainer.appendChild(li);
+          const card = document.createElement("li");
+          card.classList.add("transCard");
+          card.dataset.amount = amount;
           
+          card.innerHTML = `
+          <div class="trans-content">
+          <p class="trans-reason">${reason || "Sin descripción"}</p>
+          <p class="trans-amount">${amount >= 0 ? "+" : ""}$${amount.toFixed(2)}</p>
+          </div>
+          `;
+
+          transContainer.appendChild(card);
           
           // Actualizar saldo
           saldo += amount;
