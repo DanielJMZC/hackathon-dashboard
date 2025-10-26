@@ -6,10 +6,10 @@ import {authenticateToken} from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // POST /api/AI
-router.post("/AI", authenticateToken, generateUserMissions);
+router.post("/model", authenticateToken, generateUserMissions);
 
 
-// POST /api/missions/accept/:userId
+// POST /api/AI/accept
 router.post('/accept', authenticateToken, acceptMissionController);
 
 export default router;
