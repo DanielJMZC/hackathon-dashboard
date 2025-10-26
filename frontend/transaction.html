@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Save the Money</title>
   <style> 
     body {
@@ -10,17 +10,37 @@
       background-size: 90%;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="button.css">
-
-  <!--link a imagenes-->
-
+  <link rel="stylesheet" href="style3.css">
 </head>
-<body>
-  <section>
-    <h1>Save the Money</h1>
 
+
+<body>
+    <div class="container">
+        <div class="addTransacciones">
+            <h2>List of transactions</h2>
+            <p id="saldoTotal">Saldo: $0</p>
+            <div class="addGasto">
+                <input type="text" id="inputReasonTrans" placeholder="Add reason">
+                <input type="text" id="inputBoxTrans" placeholder="Add a transaction...">
+                <button onclick="addTransac()">Add</button> <!--onclick="funcion para agregar transacción"-->
+            </div>
+            <ul id="transContainer">
+
+
+            </ul>
+        </div>
+    </div>
+
+    <!--Falta agregar código para que los datos seann dinamicos-->
+
+
+
+
+
+
+
+
+    <!--Sidebar-->
     <aside class="sidebar">
       <ul class = "sidebarList">
         <!--Header del sidebar -->
@@ -67,7 +87,32 @@
         </li>
       </ul>
     </aside>
-  </section>
 
+    <script> 
+        const inputReason = document.getElementById("inputReasonTrans");
+        const inputAmount = document.getElementById("inputBoxTrans");
+        const transContainer = document.getElementById("transContainer");
+        const saldoTotal = document.getElementById("saldoTotal");
+
+        let saldo = 0;
+
+        function addTransac() {
+          const reason = inputReason.value.trim();
+          const amount = parseFloat(inputAmount.value.trim());
+
+          const li = document.createElement("li");
+          li.textContent = `${reason ? reason : "Sin descripción"}: ${amount >= 0 ? "+" : ""}$${amount.toFixed(2)}`;
+          transContainer.appendChild(li);
+          
+          
+          // Actualizar saldo
+          saldo += amount;
+          saldoTotal.textContent = `Saldo actual: $${saldo.toFixed(2)}`;
+
+          
+          inputReason.value = "";
+          inputAmount.value = "";
+        }
+    </script>
 </body>
 </html>
