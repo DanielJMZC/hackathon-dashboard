@@ -14,7 +14,7 @@ const getAllBadges = async(req, res) => {
 // 2️⃣ Listar todas las badges de un usuario
 const getUserBadges = async(req, res) => {
   try {
-    const { userId } = req.params; // se recibe por URL, ej: /users/:userId/badges
+    const userId = req.user.id; // se recibe por URL, ej: /users/:userId/badges
     const badges = await badgeService.getUserBadges(Number(userId));
     res.status(200).json(badges);
   } catch (err) {
@@ -25,7 +25,8 @@ const getUserBadges = async(req, res) => {
 // 3️⃣ Asignar una badge a un usuario
 const awardBadge = async(req, res) => {
   try {
-    const { userId, badgeId } = req.body; // se recibe por POST
+    const userId = req.user.id;
+    const { badgeId } = req.body; // se recibe por POST
     const result = await badgeService.awardBadgeToUser(Number(userId), Number(badgeId));
     res.status(200).json(result);
   } catch (err) {
@@ -36,7 +37,7 @@ const awardBadge = async(req, res) => {
 // 4️⃣ Contar cuántas badges tiene un usuario
 const countUserBadges = async(req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const count = await badgeService.countUserBadges(Number(userId));
     res.status(200).json({ userId: Number(userId), badgeCount: count });
   } catch (err) {
