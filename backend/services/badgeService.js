@@ -34,3 +34,38 @@ export async function getAllBadges() {
 export async function countUserBadges(userId) {
   return await userBadgesModel.countUserBadges(userId);
 }
+
+export async function checkAndAwardType1Badge(userId) {
+  try {
+
+    const [existingBadge] = await db.query(
+      `SELECT * FROM user_badges WHERE user_id = ? AND badge_id = ?`,
+      [userId, 1]
+    );
+    if (existingBadge.length > 0) {
+      return null; // already awarded
+    }
+
+    const [completedMissions] = await db.query(
+      `SELECT COUNT(*) AS total FROM missions WHERE user_id = ? AND status = ?`,
+      [userId, 'completed']
+    );
+
+    if (completedMissions[0].total <= 1) {
+      return null; 
+    }
+
+
+    const [result] = await db.query(
+      `INSERT INTO user_badges (user_id, badge_id, awarded_at) VALUES (?, ?, ?)`,
+      [userId, 1, new Date()]
+    );
+
+    console.log(`Type 1 badge awarded to user ${userId}`);
+    return { badgeId: 1, userId };
+
+  } catch (err) {
+    console.error("Error awarding Type 1 badge:", err);
+    throw err;
+  }
+}

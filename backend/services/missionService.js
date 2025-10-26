@@ -1,4 +1,4 @@
-import {updateMissionStatus} from '../models/missionModel.js';
+import {updateMissionStatus, getMissionsForUser} from '../models/missionModel.js';
 import {awardMissionXP, awardMissionGold} from '../services/transactionService.js';
 
 export async function completeMission(userId, missionId) {
