@@ -3,7 +3,8 @@ import * as missionService from '../services/missionService.js';
 
 const completeMission = async(req, res) => {
     try {
-        const {userId, missionId} = req.body;
+        const userId = req.user.id;
+        const { missionId } = req.body;
         await missionService.completeMission(userId, missionId);
         res.status(200).json({message: 'Completed Mission'});
     } catch (err) {
@@ -13,7 +14,7 @@ const completeMission = async(req, res) => {
 
 const getAllUserMissions = async(req, res) => {
     try {
-        const {userId} = req.body;
+        const userId = req.user.id;
         await missionService.getAllUserMissions(userId);
         res.status(200).json({message: 'Received all User missions'});
     } catch (err) {

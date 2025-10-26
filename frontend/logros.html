@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Save the Money</title>
+  <style> 
+    body {
+      margin: 0;
+      background-image: url("./Assets/backgroundTitle.png");
+      background-size: 90%;
+    }
+  </style>
+  <link rel="stylesheet" href="styleLogros.css" />
+</head>
+<body>
+  <main class="achievements-container">
+    <h2>🏆 Mis Logros</h2>
+    <section class="achievements-grid">
+      <!-- Cada logro es una tarjeta -->
+      <div class="achievement unlocked">
+        <img src="./Assets/medal-gold.svg" alt="Logro 1" class="achievement-icon" />
+        <h2 class="achievement-title">Primera misión</h2>
+        <p class="achievement-desc">Completaste tu primera misión con éxito.</p>
+      </div>
+
+      <div class="achievement unlocked">
+        <img src="./Assets/medal-gold(1).svg" alt="Logro bloqueado" class="achievement-icon" />
+        <h2 class="achievement-title">Cazador de ofertas</h2>
+        <p class="achievement-desc">Registra 5 gastos menores a $50</p>
+      </div>
+
+      <div class="achievement unlocked">
+        <img src="./Assets/badge-medal-svgrepo-com (1).svg" alt="Logro bloqueado" class="achievement-icon" />
+        <h2 class="achievement-title">Maestro del ahorro</h2>
+        <p class="achievement-desc">Ahorra $1000 en total.</p>
+      </div>
+
+      <div class="achievement unlocked">
+        <img src="./Assets/medal-medal-svgrepo-com.svg" alt="Logro bloqueado" class="achievement-icon" />
+        <h2 class="achievement-title">Maestro del balance</h2>
+        <p class="achievement-desc">Mantén saldo positivo 7 días seguidos.</p>
+      </div>
+
+      <div class="achievement unlocked">
+        <img src="./Assets/medal-medal-svgrepo-com (1).svg" alt="Logro bloqueado" class="achievement-icon" />
+        <h2 class="achievement-title">Racha Imparable</h2>
+        <p class="achievement-desc">Realiza transacciones durante 5 días consecutivos.</p>
+      </div>
+
+      <div class="achievement unlocked">
+        <img src="./Assets/chevron-military-svgrepo-com.svg" alt="Logro bloqueado" class="achievement-icon" />
+        <h2 class="achievement-title">Estrategia financiero</h2>
+        <p class="achievement-desc">Realiza al menos una transacción de ingreso y una de gasto en el mismo día.</p>
+      </div>
+    </section>
+
+    <section>
+      <aside class="sidebar">
+        <ul class = "sidebarList">
+
+          <!-- Primera opcion del sidebar (...)-->
+          <li class="sidebarElement">
+            <!-- Icono de missions-->
+            <img src="./Assets/scroll3.svg" class="sidebarIcon">
+
+            <div class="sidebarHide">
+              <p class="sidebarText"> Missions</p>
+            </div>
+          </li>
+
+          <!--Segunda opcion - badge-->
+          <li class="sidebarElement">
+            <!-- Icono de badge-->
+            <img src="./Assets/badge.svg" class="sidebarIcon">
+            <div class="sidebarHide">
+              <a href="logros.html" class="sidebarText">Badges</a>
+            </div>
+          </li>
+
+          <!--Tercera opcion - transactions-->
+          <li class="sidebarElement">
+            <!-- Icono de transaction-->
+            <img src="./Assets/money.svg" class="sidebarIcon">
+
+            <div class="sidebarHide">
+              <a href="transaction.html" class="sidebarText">Transactions</a>
+            </div>
+          </li>
+
+          <!--Log out-->
+          <li class="sidebarElement" >
+            <img src="./Assets/logout.svg" class = "sidebarIcon">
+            <div class="sidebarHide">
+              <a href="login.html" class="sidebarText">Log out</a>
+            </div>
+          </li>
+          <!--Quinta opción - return button-->
+          <li class="sidebarElement">
+            <!-- Icono de return-->
+            <img src="./Assets/leftarrow.svg" class="sidebarIcon">
+            <div class="sidebarHide">
+              <a href="index.html" class="sidebarText">Return</a>
+            </div>
+          </li>
+        </ul>
+      </aside>
+  </section>
+
+  </main>
+</body>
+</html>

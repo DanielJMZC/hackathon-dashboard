@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  font-family: 'Pixels', sans-serif;
+  background-color: #f0f0f0;
+}
+
+.achievements-container {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  color: #ff8800;
+  margin-bottom: 40px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.achievement {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.achievement:hover {
+  transform: scale(1.03);
+}
+
+.achievement-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.achievement-title {
+  font-size: 20px;
+  margin: 10px 0 5px;
+}
+
+.achievement-desc {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Estados */
+.unlocked {
+  border-left: 6px solid #4caf50;
+}
+
+.locked {
+  opacity: 0.5;
+  border-left: 6px solid #aaa;
+}
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'Pixels';
+    src: url("./Fonts/Game.otf");
+}
+@font-face {
+    font-family: 'Maestro';
+    src: url("./Fonts/Maestro.otf")
+}
+
+h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: 'Maestro', sans-serif;
+    font-size: 200px;
+    text-align: center;
+    transform: translate(-50%, -80%);
+    color: rgb(221, 188, 1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+.sidebar{
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: rgb(180, 216, 57);
+    width: max-content;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    height: 660px;
+}
+
+.sidebarText {
+    font-family: 'Pixels', sans-serif;
+    font-size: 30px;
+}
+
+.sidebar:hover .sidebarElement{
+    grid-template-columns: 40px 1fr;
+}
+
+.sidebarList {
+    list-style: none;
+    padding: 0;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+
+}
+
+.sidebarElement{
+    padding: .5rem .3rem;
+    border-radius:3px;
+
+    display: grid;
+    align-items: center;
+    grid-template-columns: 40px 0px;
+    column-gap: 0.5rem;
+    color: rgb(19, 120, 91);
+}
+
+.sidebarIcon{
+    width: 100%;
+    overflow: hidden;
+    justify-self: center;
+}
+
+/*Falta logo*/
+
+.sidebarIconLogout{
+    width: 40px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+
+}
+
+/*logo no muestra seleccion*/
+.sidebarElement:not(.sidebarElementLogo):hover{
+    background-color: rgb(250, 111, 6);
+    color: rgb(151, 69, 6);
+    fill:rgb(151, 69, 6);
+    cursor: pointer;
+
+    transition: grid-template-columns 0.4s;
+}
+
+.sidebarElement:not(.sidebarElementLogo){
+    margin-bottom: 1rem;
+}
+
+/*falta carga logos para cada opcion*/
+
+.sidebarHide{
+    overflow: hidden;
+}
+
+.sidebarElementLogout{
+    margin-top: 100px;
+    text-wrap: nowrap;
+    text-align: left;
+    font-family: 'Pixels', sans-serif;
+    font-size: 30px;
+}
+.sidebarTitle{
+    padding-left: 0.5rem;
+    text-align: 50px;
+    margin-left: auto;
+}
+
+.sidebarText, .sidebarTitle {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

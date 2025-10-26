@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Save the Money</title>
+  <title>Save the Money</title>                      
   <style> 
     body {
       margin: 0;
@@ -17,12 +17,12 @@
 <body>
     <div class="container">
         <div class="addTransacciones">
-            <h2>List of transactions</h2>
+            <h2>Transaction History</h2>
             <p id="saldoTotal">Saldo: $0</p>
             <div class="addGasto">
-                <input type="text" id="inputReasonTrans" placeholder="Add reason">
-                <input type="text" id="inputBoxTrans" placeholder="Add a transaction...">
-                <button onclick="addTransac()">Add</button> <!--onclick="funcion para agregar transacción"-->
+                <input type="text" id="inputReasonTrans" placeholder="Reason of transaction">
+                <input type="text" id="inputBoxTrans" placeholder="Amount for the transaction">
+                <button id=addTransactionBTN>Add</button> 
             </div>
             <ul id="transContainer">
 
@@ -33,46 +33,32 @@
 
     <!--Falta agregar código para que los datos seann dinamicos-->
 
-
-
-
-
-
-
-
     <!--Sidebar-->
-    <aside class="sidebar">
-      <ul class = "sidebarList">
-        <!--Header del sidebar -->
-        <li class="sidebarElement sidebarElementLogo">
-          <div class="sidebarHide">
-            <p clase="sidebarText">BOOM</p>
-          </div>
-        </li>
+        <aside class="sidebar">
+          <ul class = "sidebarList">
 
-        <!-- Primera opcion del sidebar (...)-->
-        <li class="sidebarElement">
-          <!-- Icono de missions-->
-          <img src="./Assets/scroll3.svg" class="sidebarIcon">
+            <!-- Primera opcion del sidebar (...)-->
+            <li class="sidebarElement">
+              <!-- Icono de missions-->
+              <img src="./Assets/scroll3.svg" class="sidebarIcon">
+              <div class="sidebarHide">
+                <p class="sidebarText"> Missions</p>
+              </div>
+            </li>
 
-          <div class="sidebarHide">
-            <p class="sidebarText"> Missions</p>
-          </div>
-        </li>
+            <!--Segunda opcion - badge-->
+            <li class="sidebarElement">
+              <!-- Icono de badge-->
+              <img src="./Assets/badge.svg" class="sidebarIcon">
+              <div class="sidebarHide">
+                <a href="logros.html" class="sidebarText">Badges</a>
+              </div>
+            </li>
 
-        <!--Segunda opcion - badge-->
-        <li class="sidebarElement">
-          <!-- Icono de badge-->
-          <img src="./Assets/badge.svg" class="sidebarIcon">
-          <div class="sidebarHide">
-            <p class="sidebarText"> Badges</p>
-          </div>
-        </li>
-
-        <!--Tercera opcion - transactions-->
-        <li class="sidebarElement">
-          <!-- Icono de transaction-->
-          <img src="./Assets/money.svg" class="sidebarIcon">
+            <!--Tercera opcion - transactions-->
+            <li class="sidebarElement">
+              <!-- Icono de transaction-->
+              <img src="./Assets/money.svg" class="sidebarIcon">
 
           <div class="sidebarHide">
             <a href="transaction.html" class="sidebarText">Transactions</a>
@@ -95,32 +81,7 @@
         </li>
       </ul>
     </aside>
-
-    <script> 
-        const inputReason = document.getElementById("inputReasonTrans");
-        const inputAmount = document.getElementById("inputBoxTrans");
-        const transContainer = document.getElementById("transContainer");
-        const saldoTotal = document.getElementById("saldoTotal");
-
-        let saldo = 0;
-
-        function addTransac() {
-          const reason = inputReason.value.trim();
-          const amount = parseFloat(inputAmount.value.trim());
-
-          const li = document.createElement("li");
-          li.textContent = `${reason ? reason : "Sin descripción"}: ${amount >= 0 ? "+" : ""}$${amount.toFixed(2)}`;
-          transContainer.appendChild(li);
-          
-          
-          // Actualizar saldo
-          saldo += amount;
-          saldoTotal.textContent = `Saldo actual: $${saldo.toFixed(2)}`;
-
-          
-          inputReason.value = "";
-          inputAmount.value = "";
-        }
-    </script>
 </body>
 </html>
+<script src="js/transactions.js"></script>
+

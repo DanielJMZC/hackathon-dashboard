@@ -23,12 +23,6 @@
 
     <aside class="sidebar">
       <ul class = "sidebarList">
-        <!--Header del sidebar -->
-        <li class="sidebarElement sidebarElementLogo">
-          <div class="sidebarHide">
-            <p clase="sidebarText">BOOM</p>
-          </div>
-        </li>
 
         <!-- Primera opcion del sidebar (...)-->
         <li class="sidebarElement">
@@ -42,12 +36,12 @@
 
         <!--Segunda opcion - badge-->
         <li class="sidebarElement">
-          <!-- Icono de badge-->
-          <img src="./Assets/badge.svg" class="sidebarIcon">
-          <div class="sidebarHide">
-            <p class="sidebarText"> Badges</p>
-          </div>
-        </li>
+            <!-- Icono de badge-->
+            <img src="./Assets/badge.svg" class="sidebarIcon">
+            <div class="sidebarHide">
+              <a href="logros.html" class="sidebarText">Badges</a>
+            </div>
+          </li>
 
         <!--Tercera opcion - transactions-->
         <li class="sidebarElement">
@@ -62,9 +56,22 @@
         <li class="sidebarElement" >
           <img src="./Assets/logout.svg" class = "sidebarIcon">
           <div class="sidebarHide">
-            <a href="login.html" class="sidebarText">Log out</a>
+            <a href="#" class="sidebarText" id="logoutBtn">Log out</a>
           </div>
         </li>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            logoutBtn.addEventListener("click", (e) => {
+              e.preventDefault();          // Prevent default link navigation
+              localStorage.removeItem("token"); 
+               localStorage.removeItem("user");  // Delete the token
+              window.location.href = "login.html"; // Redirect to login
+            });
+          });
+        </script>
         <!--Quinta opción - return button-->
         <li class="sidebarElement">
           <!-- Icono de return-->

@@ -1,12 +1,12 @@
 import { db } from '../db.js';
 
-export async function createMission(userId, description, rewardXp, rewardGold, name, expiration) {
+export async function createMission(userId, description, rewardXp, rewardGold, name, expiration, difficulty, category) {
 try {
   const now = new Date();
   const status = 'on_going';
   const [result] = await db.query(
-    'INSERT INTO mission (user_id, description, reward_xp, reward_gold, created_at, name, expiration_in, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-    [userId, description, rewardXp, rewardGold, now, name, expiration, status]
+    'INSERT INTO mission (user_id, description, reward_xp, reward_gold, created_at, name, expiration_in, status, category, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [userId, description, rewardXp, rewardGold, now, name, expiration, status, category, difficulty]
   );
 
   return result.insertId;

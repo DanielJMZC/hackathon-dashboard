@@ -14,6 +14,11 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(req.method, req.url, req.body);
+  next();
+});
+
 //Mount routers
 app.use('/api/users', userRoutes);
 app.use('/api/missions', missionRoutes);
