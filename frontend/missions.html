@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Save the Money</title>
+  <link rel="stylesheet" href="style3.css">
+  <style>
+    body {
+      margin: 0;
+      background-image: url("./Assets/backgroundTitle.png");
+      background-size: 90%;
+      font-family: 'Courier New', monospace;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: row;
+      min-height: 100vh;
+      padding: 30px;
+      gap: 40px;
+    }
+
+    .accepted-missions {
+      width: 40%;
+      max-width: 400px;
+      border: 2px solid white;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 85vh;
+    }
+
+    .accepted-missions h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .mission-entry {
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .container {
+      width: 55%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .mission-form {
+      margin-bottom: 20px;
+    }
+
+    .ai-response {
+      border: 2px solid white;
+      padding: 15px;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    .mission-box {
+      border: 2px solid white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .mission-field {
+      border: 1px solid white;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+
+    .mission-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      background-color: #222;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- LEFT PANEL: All accepted missions -->
+  <div class="accepted-missions" id="acceptedMissions">
+    <h2>All Accepted Missions ❤️</h2>
+
+    <!-- Example of one mission box (just for preview) -->
+    <div class="mission-entry">
+      <strong>Mission Name:</strong> Example Mission<br>
+      <strong>Description:</strong> Lorem ipsum dolor sit amet.<br>
+      <strong>XP:</strong> 0<br>
+      <strong>Gold:</strong> 0<br>
+      <strong>Difficulty:</strong> ---<br>
+      <strong>Category:</strong> ---<br>
+      <strong>Expiration Date:</strong> ---
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL: Main mission generator -->
+  <div class="container">
+    <form class="mission-form">
+      <h2>Generate your next mission!</h2>
+      <label for="title">
+        <span>Tell us your idea!</span>
+        <input type="text" name="title">
+        <button type="submit">Generate Mission</button>
+      </label>
+    </form>
+
+    <div class="ai-response" id="aiResponse">
+      <strong>AI Response:</strong>
+      <p>Waiting for AI to respond...</p>
+    </div>
+
+    <div class="mission-box" id="missionBox">
+      <div class="mission-field"><strong>Mission Description:</strong> <span id="missionDescription">---</span></div>
+      <div class="mission-field"><strong>Mission Name:</strong> <span id="missionName">---</span></div>
+      <div class="mission-field"><strong>XP:</strong> <span id="missionXP">0</span></div>
+      <div class="mission-field"><strong>Gold:</strong> <span id="missionGold">0</span></div>
+      <div class="mission-field"><strong>Difficulty:</strong> <span id="missionDifficulty">---</span></div>
+      <div class="mission-field"><strong>Category:</strong> <span id="missionCategory">---</span></div>
+      <div class="mission-field"><strong>Expiration Date:</strong> <span id="missionExp">---</span></div>
+    </div>
+
+    <div class="mission-buttons">
+      <button id="acceptBtn">Accept</button>
+      <button id="declineBtn">Decline</button>
+    </div>
+  </div>
+
+  <script src="./missions.js"></script>
+</body>
+</html>
