@@ -38,29 +38,68 @@ const MISSION_RESPONSE_SCHEMA = {
 
  
 export async function getUserQuests(userId, userMessage) {
+  try {
+    // Get conversation history
     const history = await getConversationHistory(userId);
 
-    const chats = history.map(msg => ({
-        role: msg.role, // "user" or "assistant"
-        parts: [
-            { text: msg.content.text || JSON.stringify(msg.content) }
-        ]
-    }));
+    // Map history to AI chat format
+    const chats = history.map(msg => {
+      let content;
+      try {
+        content = typeof msg.content === "string" ? JSON.parse(msg.content) : msg.content;
+      } catch {
+        content = msg.content; // fallback if parsing fails
+      }
+      return { role: msg.role, parts: [{ text: content.text || JSON.stringify(content) }] };
+    });
 
-   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: userMessage,
-    history: chats,
-    config: {
-      systemInstruction: "You are a friendly gamified finance AI: provide financial advice under advice and create only one mission at a time in strict JSON with fields name, description, category (savings, investment, budgeting, debt, other), difficulty (easy, medium, hard), xp (low, considering level-up 100/250/450), gold, expiration date and never duplicate missions, use history to avoid repetition, do not stray from this format, be unique with every quest, and start with short-term (one-day) quests before progressing to longer-term missions. The expiration date MUST be in the future, starting from today's date in October 2025.",
-      responseMimeType: "application/json",
-      responseSchema: MISSION_RESPONSE_SCHEMA
-    },
-  });
-  
-    const parsed = JSON.parse(response.text);
-    console.log(parsed);
+    // Call Gemini AI
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: userMessage,
+      history: chats,
+      config: {
+        systemInstruction: `
+          You are a friendly gamified finance AI:
+          provide financial advice under 'advice' and create only one mission at a time
+          in strict JSON with fields name, description, category (savings, investment, budgeting, debt, other),
+          difficulty (easy, medium, hard), xp (low, considering level-up 100/250/450),
+          gold, expiration date and never duplicate missions, use history to avoid repetition,
+          do not stray from this format, be unique with every quest,
+          and start with short-term (one-day) quests before progressing to longer-term missions.
+          The expiration date MUST be in the future, starting from today's date in October 2025.
+        `,
+        responseMimeType: "application/json",
+        responseSchema: MISSION_RESPONSE_SCHEMA
+      },
+    });
+
+    console.log("RAW AI RESPONSE:", response);
+
+    // Attempt to parse JSON safely
+    let parsed;
+    try {
+      parsed = JSON.parse(response.text);
+    } catch (err) {
+      console.warn("AI response is not valid JSON, trying to extract object...");
+      const match = response.text.match(/\{.*\}/s);
+      if (match) parsed = JSON.parse(match[0]);
+      else throw new Error("Failed to parse AI response");
+    }
+
+    console.log("PARSED AI RESPONSE:", parsed);
+
+    // Check for missions
+    if (!parsed.missions || parsed.missions.length === 0) {
+      throw new Error("AI returned no missions");
+    }
+
     return parsed;
+
+  } catch (err) {
+    console.error("Error in getUserQuests:", err);
+    throw err; // rethrow so the controller can return 500
+  }
 }
 
 export async function sendMessage(userId, userMessage) {
@@ -91,7 +130,16 @@ export async function acceptMission(userId, aiResponse) {
     mission.category
   );
 
-  return savedMission;
+  return {
+        id: savedMission.insertId || null, 
+        name: mission.name,
+        description: mission.description,
+        xp: Math.floor(Number(mission.xp) || 0),
+        gold: Math.floor(Number(mission.gold) || 0),
+        difficulty: mission.difficulty,
+        category: mission.category,
+        expiration: mission.expiration
+    };
 
 }
 

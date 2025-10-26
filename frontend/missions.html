@@ -103,44 +103,65 @@
 <body>
   <!-- LEFT PANEL: All accepted missions -->
   <div class="accepted-missions" id="acceptedMissions">
-    <h2>All Accepted Missions ❤️</h2>
+    <h2 id="acceptedMissionsTitle">All Accepted Missions ❤️</h2>
 
     <!-- Example of one mission box (just for preview) -->
-    <div class="mission-entry">
-      <strong>Mission Name:</strong> Example Mission<br>
-      <strong>Description:</strong> Lorem ipsum dolor sit amet.<br>
-      <strong>XP:</strong> 0<br>
-      <strong>Gold:</strong> 0<br>
-      <strong>Difficulty:</strong> ---<br>
-      <strong>Category:</strong> ---<br>
-      <strong>Expiration Date:</strong> ---
+    <div class="mission-entry" id="exampleMission">
+      <strong>Mission Name:</strong> <span id="exampleMissionName">Example Mission</span><br>
+      <strong>Description:</strong> <span id="exampleMissionDesc">Lorem ipsum dolor sit amet.</span><br>
+      <strong>XP:</strong> <span id="exampleMissionXP">0</span><br>
+      <strong>Gold:</strong> <span id="exampleMissionGold">0</span><br>
+      <strong>Difficulty:</strong> <span id="exampleMissionDifficulty">---</span><br>
+      <strong>Category:</strong> <span id="exampleMissionCategory">---</span><br>
+      <strong>Expiration Date:</strong> <span id="exampleMissionExp">---</span>
     </div>
   </div>
 
   <!-- RIGHT PANEL: Main mission generator -->
   <div class="container">
-    <form class="mission-form">
-      <h2>Generate your next mission!</h2>
-      <label for="title">
+    <form class="mission-form" id="missionForm">
+      <h2 id="generateMissionTitle">Generate your next mission!</h2>
+      <label for="missionInput">
         <span>Tell us your idea!</span>
-        <input type="text" name="title">
-        <button type="submit">Generate Mission</button>
+        <input type="text" name="title" id="missionInput">
+        <button type="submit" id="generateMissionBtn">Generate Mission</button>
       </label>
     </form>
 
     <div class="ai-response" id="aiResponse">
       <strong>AI Response:</strong>
-      <p>Waiting for AI to respond...</p>
+      <p id="aiResponseText">Waiting for AI to respond...</p>
     </div>
 
     <div class="mission-box" id="missionBox">
-      <div class="mission-field"><strong>Mission Description:</strong> <span id="missionDescription">---</span></div>
-      <div class="mission-field"><strong>Mission Name:</strong> <span id="missionName">---</span></div>
-      <div class="mission-field"><strong>XP:</strong> <span id="missionXP">0</span></div>
-      <div class="mission-field"><strong>Gold:</strong> <span id="missionGold">0</span></div>
-      <div class="mission-field"><strong>Difficulty:</strong> <span id="missionDifficulty">---</span></div>
-      <div class="mission-field"><strong>Category:</strong> <span id="missionCategory">---</span></div>
-      <div class="mission-field"><strong>Expiration Date:</strong> <span id="missionExp">---</span></div>
+      <div class="mission-field">
+        <strong>Mission Description:</strong>
+        <span id="missionDescription">---</span>
+      </div>
+      <div class="mission-field">
+        <strong>Mission Name:</strong>
+        <span id="missionName">---</span>
+      </div>
+      <div class="mission-field">
+        <strong>XP:</strong>
+        <span id="missionXP">0</span>
+      </div>
+      <div class="mission-field">
+        <strong>Gold:</strong>
+        <span id="missionGold">0</span>
+      </div>
+      <div class="mission-field">
+        <strong>Difficulty:</strong>
+        <span id="missionDifficulty">---</span>
+      </div>
+      <div class="mission-field">
+        <strong>Category:</strong>
+        <span id="missionCategory">---</span>
+      </div>
+      <div class="mission-field">
+        <strong>Expiration Date:</strong>
+        <span id="missionExp">---</span>
+      </div>
     </div>
 
     <div class="mission-buttons">
@@ -195,7 +216,54 @@
           </div>
         </li>
       </ul>
+     <!--Sidebar-->
+        <aside class="sidebar">
+          <ul class = "sidebarList">
+
+            <!-- Primera opcion del sidebar (...)-->
+            <li class="sidebarElement">
+              <!-- Icono de missions-->
+              <img src="./Assets/scroll3.svg" class="sidebarIcon">
+              <div class="sidebarHide">
+                <p class="sidebarText"> Missions</p>
+              </div>
+            </li>
+
+            <!--Segunda opcion - badge-->
+            <li class="sidebarElement">
+              <!-- Icono de badge-->
+              <img src="./Assets/badge.svg" class="sidebarIcon">
+              <div class="sidebarHide">
+                <a href="logros.html" class="sidebarText">Badges</a>
+              </div>
+            </li>
+
+            <!--Tercera opcion - transactions-->
+            <li class="sidebarElement">
+              <!-- Icono de transaction-->
+              <img src="./Assets/money.svg" class="sidebarIcon">
+
+          <div class="sidebarHide">
+            <a href="transaction.html" class="sidebarText">Transactions</a>
+          </div>
+        </li>
+        <!--Log out-->
+        <li class="sidebarElement" >
+          <img src="./Assets/logout.svg" class = "sidebarIcon">
+          <div class="sidebarHide">
+            <a href="login.html" class="sidebarText">Log out</a>
+          </div>
+        </li>
+        <!--Quinta opción - return button-->
+        <li class="sidebarElement">
+          <!-- Icono de return-->
+          <img src="./Assets/leftarrow.svg" class="sidebarIcon">
+          <div class="sidebarHide">
+            <a href="index.html" class="sidebarText">Return</a>
+          </div>
+        </li>
+      </ul>
     </aside>
 </body>
 </html>
-<script src="./missions.js"></script>
+<script src="js/missions.js"></script>
